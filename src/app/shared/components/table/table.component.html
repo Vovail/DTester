@@ -1,13 +1,13 @@
 <div class="container-fluid">
     <ul class="list-group entity-list">
         <li class="list-group-item row hidden-xs">
-            <div *ngFor="let item of headers" [ngClass]="item.className">{{item.name}}</div>
+            <div *ngFor="let item of headers" [ngClass]="item.className" [innerHTML]="item.name"></div>
         </li>
         <li class="list-group-item row"
             *ngFor="let entity of tableData; let i=index">
             <div *ngFor="let item of entity.entityColumns; let j=index" [ngClass]="headers[j].className">
-                <span class="visible-xs-inline-block">{{headers[j].name+": "}}</span>
-                <span class="align-xs" *ngIf="headers[j].name !== 'Вкладення'">{{item}}</span>
+                <span class="visible-xs-inline-block" [innerHTML]="headers[j].name+': '"></span>
+                <span class="align-xs" *ngIf="headers[j].name !== 'Вкладення'" [innerHTML]="item"></span>
                 <span class="align-xs" *ngIf="headers[j].name === 'Вкладення'">
                     <img [src]="item" alt="Зображення для тесту" width="200px">
                 </span>

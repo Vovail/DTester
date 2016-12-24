@@ -2,24 +2,23 @@
     <button type="button" class="close" (click)="activeModal.dismiss()">
         <span>&times;</span>
     </button>
-    <h4 class="modal-title">{{config.title}}</h4>
+    <h4 class="modal-title" [innerHTML]="config.title"></h4>
 </div>
 <div class="modal-body modal-body-add-edit">
     <div *ngIf="config.select" >
         <div class="input-group input-group-add-edit" *ngFor="let item of config.select">
-            <span class="input-group-addon modal-span">{{item.selectName}}:</span>
+            <span class="input-group-addon modal-span" [innerHTML]="item.selectName+':'"></span>
             <select class="form-control"
                     name="count"
                     required
                     [(ngModel)]="item.selected">
-                <option *ngFor="let option of item.selectItem">{{option}}</option>
+                <option *ngFor="let option of item.selectItem" [innerHTML]="option"></option>
             </select>
         </div>
     </div>
     <div [formGroup]="addEditForm" class="input-group input-group-add-edit" *ngFor="let item of config.list">
             <span *ngIf="item.name !=='Дата початку' && item.name !== 'Дата кінця'"
-                  class="input-group-addon modal-span">
-                {{item.name}}:
+                  class="input-group-addon modal-span" [innerHTML]="item.name+':'">
             </span>
         <input *ngIf="item.name !=='Дата початку' && item.name !== 'Дата кінця'"
                [type]="item.type"
@@ -52,7 +51,7 @@
             Це поле є обов'язковим
         </div>
         <div class="input-group" *ngIf="item.name === 'Дата початку' || item.name === 'Дата кінця'">
-            <span class="input-group-addon modal-span">{{item.name}}:</span>
+            <span class="input-group-addon modal-span" [innerHTML]="item.name+':'"></span>
             <input
                     class="form-control"
                     placeholder={{item.placeholder}}
@@ -85,8 +84,11 @@
                    (click)="modalOpen()"
                    [value]="config.img.label">
             <img *ngIf="config.img.value" [src]="config.img.value" class="test-img">
-            <button *ngIf="config.action == 'edit'" class="modalInput btn btn-danger remove-img" title="Видалити зображення">
-                <span class="glyphicon glyphicon-trash" aria-hidden="true" (click)="removeImage()"></span>
+            <button *ngIf="config.action == 'edit'"
+                    class="modalInput btn btn-danger remove-img"
+                    title="Видалити зображення"
+                    (click)="removeImage()">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </button>
         </div>
     </div>

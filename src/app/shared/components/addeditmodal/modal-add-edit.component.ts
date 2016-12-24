@@ -83,6 +83,7 @@ export class ModalAddEditComponent implements OnInit {
                 Validators.minLength(8)
             ]),
         });
+        this.convertToHtml();
     }
 
     dateValidator(control: FormControl): {[key: string]: boolean} {
@@ -100,7 +101,7 @@ export class ModalAddEditComponent implements OnInit {
     }
 
     compareDates(startDate, endDate): number {
-        const newStartDate = new Date(startDate.year, startDate.month - 1 , startDate.day);
+        const newStartDate = new Date(startDate.year, startDate.month - 1, startDate.day);
         const dateNow = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
         if (newStartDate < dateNow) {
             return 0;
@@ -181,9 +182,10 @@ export class ModalAddEditComponent implements OnInit {
     isDisabled(date: NgbDateStruct, current: {month: number}) {
         return date.month !== current.month;
     }
+
     // the end of datapicker's code
 
-    modalOpen(){
+    modalOpen() {
         let modalRef = this.modalService.open(ModalImageCropperComponent);
         modalRef.result
             .then((data: any) => {
@@ -191,5 +193,15 @@ export class ModalAddEditComponent implements OnInit {
             }, () => {
                 return;
             });
+    }
+
+    convertToHtml() {
+        let span = document.createElement("span");
+        this.config.list.forEach(elem => {
+            if (typeof elem.value !== "object") {
+                span.innerHTML = elem.value;
+                elem.value = span.innerHTML;
+            }
+        })
     }
 }

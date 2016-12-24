@@ -90,5 +90,11 @@ export class CommonService {
         this.openModalInfo("Виникла помилка. Зверніться до адміністратора.");
         console.log(error);
     }
+
+    convertToHtml(data: string):string {
+        let span = document.createElement("span");
+        span.innerHTML = data;
+        return span.innerHTML;
+    }
 }
 

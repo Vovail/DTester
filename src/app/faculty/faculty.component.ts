@@ -70,7 +70,9 @@ export class FacultyComponent implements OnInit {
             numberOfOrder = i + 1 + (this.page - 1) * this.limit;
             let faculty: any = {};
             faculty.entity_id = item.faculty_id + "";
-            faculty.entityColumns = [numberOfOrder, item.faculty_name, item.faculty_description];
+            faculty.entityColumns = [numberOfOrder,
+                this.commonService.convertToHtml(item.faculty_name),
+                this.commonService.convertToHtml(item.faculty_description)];
             return <ConfigTableData>faculty;
         });
     };
