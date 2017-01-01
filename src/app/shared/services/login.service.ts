@@ -44,11 +44,9 @@ export class LoginService {
             }
         }
         if (response.roles[1] === "student") {
-            sessionStorage.setItem("userRole", response.roles[1]);
             sessionStorage.setItem("userId", response.id);
             this._router.navigate(["/student"]);
         } else if (response.roles[1] === "admin") {
-            sessionStorage.setItem("userRole", response.roles[1]);
             this._router.navigate(["/admin"]);
         }
     };
@@ -63,7 +61,6 @@ export class LoginService {
 
     private successLogout = (response: Response): void => {
         if (response.status === 200) {
-            sessionStorage.removeItem("userRole");
             sessionStorage.removeItem("userId");
             this._router.navigate(["/login"]);
         }
@@ -73,7 +70,6 @@ export class LoginService {
         this.commonService.openModalInfo(...this.badLogoutMessage)
             .then(() => {
             }, () => {
-                sessionStorage.removeItem("userRole");
                 sessionStorage.removeItem("userId");
                 this._router.navigate(["/login"]);
             });
