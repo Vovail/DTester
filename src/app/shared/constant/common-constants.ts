@@ -24,3 +24,6 @@ export const modalInfoConfig = {
     infoString: "",
     action: ""
 };
+
+export const badDownloadDataMessage: string = "Виникла помилка в процесі завантаження даних. Зверніться до адміністратора";
+export const badDeleteDataMessage: string = "Виникла помилка в процесі видалення. Спробуйте здійснити видалення повторно!";

@@ -180,7 +180,7 @@ export class TestPlayerService {
     getTestDetails = () => {
         this.maxUserRate = 0;
         return this.subjectService.getTestDetailsByTest(this.testId)
-            .map((testDetails: TestDetail[] | DtapiResponse) => {
+            .map(testDetails => {
                 if ((testDetails as DtapiResponse).response && (testDetails as DtapiResponse).response === "no records") {
                     throw new Error("test data are absent");
                 }
