@@ -18,7 +18,7 @@ import { QuestionComponent } from "./subjects/question/question.component";
 import { AnswerComponent } from "./subjects/answer/answer.component";
 
 export const adminRoutes: Routes = [
-            {path: "", redirectTo: "statistic"},
+            {path: "", redirectTo: "statistic", pathMatch:"full"},
             {path: "statistic", component: StatisticComponent},
             {path: "subject", component: SubjectComponent},
             {path: "subject/:id/test", component: TestComponent},

@@ -5,6 +5,7 @@ export const baseUrl: string = "http://dtapi.local/";
 // AUTH action
 export const loginUrl: string = baseUrl + "login/index";
 export const logoutUrl: string = baseUrl + "login/logout";
+export const isLoggedUrl: string = baseUrl + "login/isLogged";
 
 // Url
 export const getTestsBySubjectIdUrl: string = baseUrl + "test/getTestsBySubject"; // + id of subject
@@ -24,3 +25,6 @@ export const modalInfoConfig = {
     infoString: "",
     action: ""
 };
+
+export const badDownloadDataMessage: string = "Виникла помилка в процесі завантаження даних. Зверніться до адміністратора";
+export const badDeleteDataMessage: string = "Виникла помилка в процесі видалення. Спробуйте здійснити видалення повторно!";

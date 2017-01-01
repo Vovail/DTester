@@ -6,26 +6,25 @@ import {
     ConfigModalAddEdit,
     ConfigTableHeader,
     ConfigTableAction,
-    ConfigModalInfo
+    ConfigModalInfo,
+    ConfigTableData
 } from "../shared/classes";
 
-import {CRUDService} from "../shared/services/crud.service.ts";
+import {CRUDService} from "../shared/services/crud.service";
 import {
     configAddFaculty, configEditFaculty, modalInfoConfig,
     maxSize,
-    changeLimit, pageChange, getCountRecords, getRecordsRange,
-    delRecord, findEntity, refreshData,
     headersFaculty, actionsFaculty,
     addTitle, searchTitle, entityTitle, selectLimitTitle, nothingWasChange
 } from "../shared/constant";
-import {ConfigTableData} from "../shared/classes/configs/config-table-data";
 import {CommonService} from "../shared/services/common.service";
+import {ParentEntityComponent} from "../parent-entity/parent-entity.component";
 
 
 @Component({
     templateUrl: "faculty.component.html"
 })
-export class FacultyComponent implements OnInit {
+export class FacultyComponent extends ParentEntityComponent implements OnInit {
 
     public modalInfoConfig: ConfigModalInfo = modalInfoConfig;
     public configAdd: ConfigModalAddEdit = configAddFaculty;
@@ -37,34 +36,20 @@ export class FacultyComponent implements OnInit {
     public searchTitle: string = searchTitle;
     public entityTitle: string = entityTitle;
     public selectLimitTitle: string = selectLimitTitle;
-    public entityData: ConfigTableData[] = [];
-    public entityDataLength: number;
     public entity: string = "faculty";
-    public limit: number = 5;
-    public search: string = "";
-    public page: number = 1;
-    public offset: number = 0;
-    public loader: boolean = true;
     public nothingWasChange: string[] = nothingWasChange;
 
-    constructor(private crudService: CRUDService,
+    constructor(protected crudService: CRUDService,
                 private _router: Router,
-                private commonService: CommonService) {
+                protected commonService: CommonService) {
+        super(crudService, commonService);
     };
-
-    public changeLimit = changeLimit;
-    public pageChange = pageChange;
-    public getCountRecords = getCountRecords;
-    public delRecord = delRecord;
-    public refreshData = refreshData;
-    public getRecordsRange = getRecordsRange;
-    public findEntity = findEntity;
 
     ngOnInit() {
         this.getCountRecords();
     }
 
-    private createTableConfig = (data: Faculty[]) => {
+    createTableConfig = (data: Faculty[]) => {
         let numberOfOrder: number;
         this.entityData = data.map((item, i) => {
             numberOfOrder = i + 1 + (this.page - 1) * this.limit;
